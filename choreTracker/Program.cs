@@ -1,7 +1,19 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.EntityFrameworkCore;
+using choreTracker.Models;
 
+var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+//  Creates the db connection string
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+// Adds database connection - must be before app.Build();
+builder.Services.AddDbContext<MyContext>(options =>
+{
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
+//Adding Session
+builder.Services.AddHttpContextAccessor(); 
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -15,6 +27,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+//Session
+app.UseSession(); 
 
 app.MapControllerRoute(
     name: "default",
