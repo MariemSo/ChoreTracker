@@ -1,0 +1,52 @@
+@{
+    int UserId = (int)Context.Session.GetInt32("userId");
+}
+@await Html.PartialAsync("_NavBar")
+@model List<Job>
+
+<header class="masthead bg-primary text-white text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <h1 class="masthead-heading text-uppercase mb-0">Weclome, @Context.Session.GetString("name")</h1><br>
+    </div>
+</header>
+<div class="container">
+    <h2 class="page-section-heading text-center text-uppercase text-dark mb-0 pt-5">Jobs List</h2>
+    <div class="divider-custom divider-light">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><i class='bx bxs-briefcase'></i></div>
+        <div class="divider-custom-line"></div>
+    </div>
+@* Table *@
+<table class="table table-hover">
+  <thead class="table-primary">
+    <tr>
+      <th scope="col">Job</th>
+      <th scope="col">Location</th>
+      <th scope="col" class="text-center">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (Job j in Model){
+
+    <tr class="table-active">
+      <td scope="row">@j.Title</td>
+      <td>@j.Location</td>
+      <td class="d-flex justify-content-center gap-2">
+        <button type="button" class="btn btn-primary" class="">View</button>
+        <button type="button" class="btn btn-primary" >Add</button>
+        @if ( UserId==j.Creator.UserId){
+
+        <a href="edit/@j.JobId"><button type="button" class="btn btn-primary">Edit</button></a>
+        <form asp-action="DeleteJob" asp-route-JobId="@j.JobId" method="post">
+          <button type="submit" class="btn btn-primary">Cancel</button>
+        </form>
+      
+
+        }
+      </td>
+    </tr>
+    }  
+    </tbody>
+</table>
+</div>
+</div>

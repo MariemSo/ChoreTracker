@@ -1,0 +1,35 @@
+@{
+    int UserId = (int)Context.Session.GetInt32("userId");
+
+}
+@model Job
+@await Html.PartialAsync("_NavBar")
+<div class="container">
+
+<div class="bg-dark p-5 rounded-lg m-5">
+  <h1 class="display-4 text-light">Add a Job</h1>
+  <form asp-action="CreateJob" method="post">
+    <input type="hidden" asp-for="UserId" value="@UserId">
+    <div class="form-group">
+        <label asp-for="Title" class="form-label mt-4"></label><br>
+        <span asp-validation-for="Title" class="text-secondary"></span>
+        <input asp-for="Title" class="form-control" placeholder="Enter Title">
+    </div>
+    <div class="form-group">
+      <label asp-for="Description" class="form-label mt-4"></label>
+      <span asp-validation-for="Location" class="text-danger"></span><br>
+      <textarea class="form-control" asp-for="Description" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="Location" class="form-label mt-4"></label>
+        <span asp-validation-for="Location" class="text-danger"></span> <br>
+        <input asp-for="Location" class="form-control" placeholder="Enter Location">
+    </div><br>
+    <div class="d-flex justify-content-end pt-2">
+        <input type="submit" value="Submit" class="btn btn-primary btn-lg">
+    </div>
+  </form>
+
+</div>
+
+</div>
