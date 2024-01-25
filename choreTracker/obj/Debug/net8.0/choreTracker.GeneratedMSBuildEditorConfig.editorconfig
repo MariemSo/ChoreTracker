@@ -18,6 +18,18 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\souay\OneDrive\Bureau\ChoreTracker\choreTracker
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Home/AddJob.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZGRKb2IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Home/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYXNoYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Home/EditJob.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFZGl0Sm9iLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -26,8 +38,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Home/ViewJob.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxWaWV3Sm9iLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Home/_Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Shared/_NavBar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9OYXZCYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Shared/_ValidationScriptsPartial.cshtml]
