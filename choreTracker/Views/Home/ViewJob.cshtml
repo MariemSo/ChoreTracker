@@ -1,0 +1,47 @@
+@{
+    int UserId = (int)Context.Session.GetInt32("userId");
+
+}
+@model Job
+@* ---------NavBar Partial----------*@
+@await Html.PartialAsync("_NavBar")
+
+
+<div class="container ">
+    <div class="row d-flex justify-content-between align-items-center">
+        <div class="col-6">
+            @* ---------Card For Viewing OneJob----------*@
+                <div class="card mb-3">  
+                    <h3 class="card-header bg-warning text-light">@Model.Title</h3>
+                    <div class="card-body text-dark">
+                        <p class="card-text">@Model.Description</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Location:<span class="text-dark"> @Model.Location</span></li>
+                        <li class="list-group-item">Posted By: <span class="text-dark">@Model.Creator.FName @Model.Creator.LName</li>
+                    </ul>
+                    @* ---------Buttons for User In session----------*@
+                    @if(UserId==Model.UserId){
+                    <div class="card-body">
+                        <a href="/edit/@Model.JobId" class="card-link">Edit</a>
+                        <a href="/delete/@Model.JobId" class="card-link">Delete</a>
+                    </div>
+                    }
+                    @* -----------------------------------------------*@
+                    <div class="card-footer text-muted">
+                       Posted On : @Model.CreatedAt
+                    </div>
+                </div>
+                @* ---------add to My Jobs Button ----------*@
+                 <div class="d-grid gap-2">
+                    <button class="btn btn-lg btn-outline-success" type="button">Add To My Jobs</button>
+                </div>
+            </div>
+        @* ---------Image For esthetics----------*@
+        <div class="col-6" >
+            <img src="https://img.freepik.com/premium-vector/person-sits-chair-man-has-idea-programmer-flat-design-man-with-laptop_616756-9.jpg?w=740"
+               style="size:30%" alt="">
+        </div>
+    </div>
+   
+</div>
