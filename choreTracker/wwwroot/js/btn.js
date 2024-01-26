@@ -21,16 +21,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Applying hover effect to View Buttons
-    applyHoverEffect('viewButton', 'View Details', 'btn-success');
+    applyHoverEffect('viewButton', 'Take A Pick!', 'btn-success');
 
     // Applying hover effect to Add Buttons
-    applyHoverEffect('addButton', 'Add to Favorites', 'btn-info');
+    applyHoverEffect('addButton', 'Yes You Can!', 'btn-info');
 
     // Applying hover effect to Edit Buttons
-    applyHoverEffect('editButton', 'Edit Job', 'btn-warning');
+    applyHoverEffect('editButton', 'Oups! Again!', 'btn-warning');
 
     // Applying hover effect to Cancel Buttons
-    applyHoverEffect('cancelButton', 'Cancel Job', 'btn-secondary');
+    applyHoverEffect('cancelButton', 'Seriously?', 'btn-secondary');
 
-    applyHoverEffect('doneButton', 'Done Job', 'btn-secondary');
+    applyHoverEffect('doneButton', "Oh You'r Rich!", 'btn-secondary');
 });
