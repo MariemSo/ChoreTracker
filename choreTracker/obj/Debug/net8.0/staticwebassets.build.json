@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FU/lnaLxNb3PiirRdNh4Ox8JsVv01o0zIPxkmRJhKjI=",
+  "Hash": "iUYaGH7LssJ8n0rUx/E904EtMKg0oUat5T15AbDGpu8=",
   "Source": "choreTracker",
   "BasePath": "_content/choreTracker",
   "Mode": "Default",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\souay\\OneDrive\\Bureau\\ChoreTracker\\choreTracker\\wwwroot\\js\\btn.js",
+      "SourceId": "choreTracker",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\souay\\OneDrive\\Bureau\\ChoreTracker\\choreTracker\\wwwroot\\",
+      "BasePath": "_content/choreTracker",
+      "RelativePath": "js/btn.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\btn.js"
     },
     {
       "Identity": "C:\\Users\\souay\\OneDrive\\Bureau\\ChoreTracker\\choreTracker\\wwwroot\\js\\logReg.js",

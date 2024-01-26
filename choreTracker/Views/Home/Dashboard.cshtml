@@ -3,6 +3,7 @@
 }
 @model choreTracker.Models.DashboardViewModel
 
+
 @* ---------NavBar Partial----------*@
 @await Html.PartialAsync("_NavBar")
 
@@ -35,8 +36,6 @@
     @foreach (Job j in Model.AllJobs){
       bool isFavorite = j.myUsers.Any(f => f.UserId == UserId);
       if (!isFavorite){
-
-     
     <tr class="table-active">
       <td scope="row">@j.Title</td>
       <td>@j.Location</td>
@@ -44,24 +43,24 @@
       
        @* ---------View Button ---------*@
        <a href="viewJob/@j.JobId">
-        <button type="button" class="btn btn-primary" class="">View</button>
+        <button type="button" class="viewButton btn btn-primary" >View</button>
        </a>
        @* ---------Add Button ---------*@
        @if (UserId!=j.Creator.UserId){
         <form asp-action="AddToFavorites" asp-route-JobId="@j.JobId" method="post">
-                <button type="submit" class="btn btn-primary">Add</button>
+                <button  type="submit" class="addButton btn btn-primary">Add</button>
         </form>}
        @* ---------Condition For User In Session ---------*@
         @if ( UserId==j.Creator.UserId){
             
 
             @* ---------Edit Button ---------*@
-            <a href="edit/@j.JobId"><button type="button" class="btn btn-primary">Edit</button></a>
+            <a href="edit/@j.JobId"><button  type="button" class="editButton btn btn-primary">Edit</button></a>
             
             
             @* ---------Delete Button ---------*@
-            <form asp-action="DeleteJob" asp-route-JobId="@j.JobId" method="post">
-              <button type="submit" class="btn btn-primary">Cancel</button>
+            <form asp-action="DeleteJob" asp-route-JobId="@j.JobId" method="post"  onsubmit="return confirm('Are you sure you want to cancel this job: @j.Title?');">
+              <button   type="submit" class="cancelButton btn btn-primary">Cancel</button>
             </form>
       } 
       @* -----------------------------------------------*@
@@ -73,3 +72,5 @@
 @await Html.PartialAsync("_Favorite")
 </div>
 </div>
+
+<script src="~/js/btn.js" asp-append-version="true"></script>

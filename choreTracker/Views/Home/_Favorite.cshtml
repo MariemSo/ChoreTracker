@@ -25,11 +25,11 @@
             
             @* ---------View Button ---------*@
             <a href="viewJob/@v.JobId">
-                <button type="button" class="btn btn-primary" class="">View</button>
+                <button type="button" class="viewButton btn btn-primary" class="">View</button>
             </a>
             @* ---------Done Button ---------*@
-            <form asp-action="Done" asp-route-JobId="@v.JobId" method="post">
-                <button type="submit" class="btn btn-primary">Done</button>
+            <form asp-action="Done" asp-route-JobId="@v.JobId" onsubmit="return confirm('Are you sure you want to mark this job as done?');" method="post">
+                <button type="submit" class="doneButton btn btn-primary">Done</button>
             </form >
             @* -----------------------------------------------*@
             </td>
@@ -42,3 +42,4 @@
     <img src="https://img.freepik.com/free-vector/flat-creativity-concept-illustration_52683-64279.jpg?w=740&t=st=1706238626~exp=1706239226~hmac=80d98baf36b971830a341301bd52f2406756d86e0b0808aabbafb61bd1db113c" class="img">
 </div>
 </div>
+<script src="~/js/btn.js" asp-append-version="true"></script>

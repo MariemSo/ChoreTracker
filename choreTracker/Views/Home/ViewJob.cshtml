@@ -27,9 +27,11 @@
                 </div>
                     @* ---------Buttons for User In session----------*@
                     @if(UserId==Model.UserId){
-                    <div class="d-grid gap-2">
+                    <div class="d-flex justify-content-end gap-2">
                         <button class="btn btn-lg btn-outline-success "><a href="/edit/@Model.JobId" class="text-dark">Edit</a></button>                
-                        <button class="btn btn-lg btn-outline-danger "><a href="/delete/@Model.JobId" class="text-dark">Delete</a></button>
+                        <form asp-action="DeleteJob" asp-route-JobId="@Model.JobId" method="post"  onsubmit="return confirm('Are you sure you want to cancel this job: @Model.Title?');">
+                            <button type="submit" class="btn btn-lg btn-outline-danger text-dark ">Cancel</button>
+                        </form>
                       
                     </div>
                     }
@@ -42,7 +44,7 @@
                     </div>
                     </form>}
                     else{
-                    <form asp-action="Done" asp-route-JobId="@Model.JobId" method="post">
+                    <form asp-action="Done" asp-route-JobId="@Model.JobId" method="post" onsubmit="return confirm('Are you sure you want to mark this job as done?');" method="post">
                         <div class="d-grid gap-2">
                                 <button class="btn btn-lg btn-outline-danger" type="submit">Done</button>
                         </div>
