@@ -116,7 +116,8 @@ public class HomeController : Controller
         {
             return RedirectToAction("Index");
         }
-        return View();
+        Job? oneJob = _context.Jobs.Include(c=>c.Creator).FirstOrDefault(j =>j.JobId == JobId);
+        return View(oneJob);
     }
     [HttpGet("edit/{JobId}")]
     public IActionResult EditJob(int JobId)
