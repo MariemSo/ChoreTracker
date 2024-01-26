@@ -20,22 +20,34 @@
                         <li class="list-group-item">Location:<span class="text-dark"> @Model.Location</span></li>
                         <li class="list-group-item">Posted By: <span class="text-dark">@Model.Creator.FName @Model.Creator.LName</li>
                     </ul>
-                    @* ---------Buttons for User In session----------*@
-                    @if(UserId==Model.UserId){
-                    <div class="card-body">
-                        <a href="/edit/@Model.JobId" class="card-link">Edit</a>
-                        <a href="/delete/@Model.JobId" class="card-link">Delete</a>
-                    </div>
-                    }
                     @* -----------------------------------------------*@
                     <div class="card-footer text-muted">
                        Posted On : @Model.CreatedAt
                     </div>
                 </div>
+                    @* ---------Buttons for User In session----------*@
+                    @if(UserId==Model.UserId){
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-lg btn-outline-success "><a href="/edit/@Model.JobId" class="text-dark">Edit</a></button>                
+                        <button class="btn btn-lg btn-outline-danger "><a href="/delete/@Model.JobId" class="text-dark">Delete</a></button>
+                      
+                    </div>
+                    }
                 @* ---------add to My Jobs Button ----------*@
-                 <div class="d-grid gap-2">
-                    <button class="btn btn-lg btn-outline-success" type="button">Add To My Jobs</button>
-                </div>
+                @if ( UserId!=Model.Creator.UserId){
+                @if(@Model.myUsers.Any(f =>f.UserId == UserId)){
+                    <form asp-action="AddToFavorites" asp-route-JobId="@Model.JobId" method="post">
+                    <div class="d-grid gap-2">
+                            <button class="btn btn-lg btn-outline-success" type="submit">Add To My Jobs</button>
+                    </div>
+                    </form>}
+                    else{
+                    <form asp-action="Done" asp-route-JobId="@Model.JobId" method="post">
+                        <div class="d-grid gap-2">
+                                <button class="btn btn-lg btn-outline-danger" type="submit">Done</button>
+                        </div>
+                    </form>}
+                    }
             </div>
         @* ---------Image For esthetics----------*@
         <div class="col-6" >
@@ -45,3 +57,9 @@
     </div>
    
 </div>
+
+<style>
+    a {
+text-decoration: none !important;
+}
+</style>

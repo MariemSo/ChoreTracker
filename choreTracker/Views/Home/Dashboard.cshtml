@@ -1,7 +1,7 @@
 @{
     int UserId = (int)Context.Session.GetInt32("userId");
 }
-@model List<Job>
+@model choreTracker.Models.DashboardViewModel
 
 @* ---------NavBar Partial----------*@
 @await Html.PartialAsync("_NavBar")
@@ -17,7 +17,7 @@
   <h2 class="page-section-heading text-center text-uppercase text-dark mb-0 pt-5">Jobs List</h2>
   <div class="divider-custom divider-light">
       <div class="divider-custom-line"></div>
-      <div class="divider-custom-icon"><i class='bx bxs-briefcase'></i></div>
+      <div class="divider-custom-icon"><i class='bx bx-briefcase'></i></div>
       <div class="divider-custom-line"></div>
 </div>
 
@@ -32,7 +32,11 @@
   </thead>
   <tbody>
   @* ---------Loop For Rows of Jobs List ---------*@
-    @foreach (Job j in Model){
+    @foreach (Job j in Model.AllJobs){
+      bool isFavorite = j.myUsers.Any(f => f.UserId == UserId);
+      if (!isFavorite){
+
+     
     <tr class="table-active">
       <td scope="row">@j.Title</td>
       <td>@j.Location</td>
@@ -43,24 +47,29 @@
         <button type="button" class="btn btn-primary" class="">View</button>
        </a>
        @* ---------Add Button ---------*@
-        <button type="button" class="btn btn-primary" >Add</button>
-      
-      @* ---------Condition For User In Session ---------*@
+       @if (UserId!=j.Creator.UserId){
+        <form asp-action="AddToFavorites" asp-route-JobId="@j.JobId" method="post">
+                <button type="submit" class="btn btn-primary">Add</button>
+        </form>}
+       @* ---------Condition For User In Session ---------*@
         @if ( UserId==j.Creator.UserId){
             
+
             @* ---------Edit Button ---------*@
             <a href="edit/@j.JobId"><button type="button" class="btn btn-primary">Edit</button></a>
+            
             
             @* ---------Delete Button ---------*@
             <form asp-action="DeleteJob" asp-route-JobId="@j.JobId" method="post">
               <button type="submit" class="btn btn-primary">Cancel</button>
             </form>
-      }
+      } 
       @* -----------------------------------------------*@
       </td>
     </tr>
-    }  
+    }  }
     </tbody>
 </table>
+@await Html.PartialAsync("_Favorite")
 </div>
 </div>

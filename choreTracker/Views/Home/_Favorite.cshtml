@@ -1,0 +1,44 @@
+@model choreTracker.Models.DashboardViewModel
+<div class="container">
+  <h2 class="page-section-heading text-center text-uppercase text-dark mb-0 pt-5">My Jobs</h2>
+  <div class="divider-custom divider-light">
+      <div class="divider-custom-line"></div>
+      <div class="divider-custom-icon"><i class='bx bx-clipboard'></i></div>
+      <div class="divider-custom-line"></div>
+</div>
+<div class="d-flex justify-space-between row" >
+    <div class="col-8">
+
+        <table class="table table-hover">
+        <thead class="table-primary">
+            <tr>
+            <th scope="col">My Jobs</th>
+            <th scope="col" class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        @* ---------Loop For Rows of Jobs List ---------*@
+            @foreach (Favorite v in Model.UserFavorites){
+            <tr class="table-active">
+            <td scope="row">@v.Job.Title</td>
+            <td class="d-flex justify-content-center gap-2">
+            
+            @* ---------View Button ---------*@
+            <a href="viewJob/@v.JobId">
+                <button type="button" class="btn btn-primary" class="">View</button>
+            </a>
+            @* ---------Done Button ---------*@
+            <form asp-action="Done" asp-route-JobId="@v.JobId" method="post">
+                <button type="submit" class="btn btn-primary">Done</button>
+            </form >
+            @* -----------------------------------------------*@
+            </td>
+            </tr>
+            }  
+            </tbody>
+        </table>
+    </div>
+<div class="col-2">
+    <img src="https://img.freepik.com/free-vector/flat-creativity-concept-illustration_52683-64279.jpg?w=740&t=st=1706238626~exp=1706239226~hmac=80d98baf36b971830a341301bd52f2406756d86e0b0808aabbafb61bd1db113c" class="img">
+</div>
+</div>

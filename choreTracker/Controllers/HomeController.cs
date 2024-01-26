@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using choreTracker.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata.Ecma335;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace choreTracker.Controllers;
 
@@ -20,12 +21,15 @@ public class HomeController : Controller
         _context = context;
         _logger = logger;
     }
+    //   -------------- LandingPage / LogReg Form ---------
 
     public IActionResult Index()
     {
         return View();
     }
     [HttpPost]
+    //   -------------- Register Job---------
+
     public IActionResult Register(User newUser)
     {
         if (ModelState.IsValid)
@@ -45,6 +49,8 @@ public class HomeController : Controller
         }
         return View("Index");
     }
+    //   -------------- Login Job---------
+
     [HttpPost]
     public IActionResult Login(LogUser newLogUser)
     {
@@ -69,6 +75,7 @@ public class HomeController : Controller
         }
         return View("Index");
     }
+//   -------------- LogOut---------
 
     [HttpGet("logout")]
     public IActionResult Logout()
@@ -77,6 +84,8 @@ public class HomeController : Controller
         return RedirectToAction("Index");
     }
 
+    //   -------------- Dashboard---------
+
     [HttpGet("dashboard")]
     public IActionResult Dashboard()
     {
@@ -84,10 +93,16 @@ public class HomeController : Controller
         {
             return RedirectToAction("Index");
         }
-        List<Job> AllJobs = _context.Jobs.Include(c=>c.Creator).ToList();
+        int userId = (int)HttpContext.Session.GetInt32("userId");
 
-        return View(AllJobs);
-    }
+        DashboardViewModel viewModel = new DashboardViewModel
+        {
+            AllJobs = _context.Jobs.Include(c => c.Creator).Include(f => f.myUsers).ThenInclude(e => e.User).ToList(),
+            UserFavorites = _context.Favorites.Where(f => f.UserId == userId).ToList()
+        };
+            return View(viewModel);
+        }
+    //   -------------- ADD Job / Get---------
 
     [HttpGet("addjob")]
     public IActionResult AddJob()
@@ -98,6 +113,8 @@ public class HomeController : Controller
         }
         return View();
     }
+    //   -------------- Create Job / Post---------
+
     [HttpPost("jobs/create")]
     public IActionResult CreateJob(Job newJob)
     {
@@ -109,6 +126,8 @@ public class HomeController : Controller
         }
         return View("AddJob", newJob);
     }
+    //   -------------- Show One Job---------
+
     [HttpGet("viewJob/{JobId}")]
     public IActionResult ViewJob(int JobId)
     {
@@ -119,6 +138,7 @@ public class HomeController : Controller
         Job? oneJob = _context.Jobs.Include(c=>c.Creator).FirstOrDefault(j =>j.JobId == JobId);
         return View(oneJob);
     }
+    //   -------------- Edit Job / Get ---------
     [HttpGet("edit/{JobId}")]
     public IActionResult EditJob(int JobId)
     {
@@ -130,6 +150,8 @@ public class HomeController : Controller
             .SingleOrDefault(d => d.JobId == JobId);
         return View( jobToEdit);
     }
+    //   -------------- Update Job / Post---------
+
      [HttpPost("/jobs/update/{JobId}")]
     public IActionResult UpdateJob(int JobId, Job newestJob)
     {
@@ -147,7 +169,66 @@ public class HomeController : Controller
         return View("EditJob", oldJob);
 
     }
-   
+//   -------------- Add Job To Favorite---------
+[HttpPost]
+public IActionResult AddToFavorites(int JobId)
+{
+    if (HttpContext.Session.GetInt32("userId") == null)
+    {
+        return RedirectToAction("Index");
+    }
+
+    int userId = (int)HttpContext.Session.GetInt32("userId");
+
+    bool alreadyInFavorites = _context.Favorites.Any(f => f.UserId == userId && f.JobId == JobId);
+
+    if (!alreadyInFavorites)
+    {
+        Favorite newFavorite = new Favorite
+        {
+            UserId = userId,
+            JobId = JobId
+        };
+
+        _context.Add(newFavorite);
+        _context.SaveChanges();
+        return RedirectToAction("Dashboard");
+    }
+
+    return RedirectToAction("Dashboard");
+}
+// ----------Done /Delete Job From Fav-------
+[HttpPost("Favorite/delete")]
+public IActionResult Done(int JobId)
+{
+    if (HttpContext.Session.GetInt32("userId") == null)
+    {
+        return RedirectToAction("Index");
+    }
+
+    int userId = (int)HttpContext.Session.GetInt32("userId");
+
+    Favorite favoriteToRemove = _context.Favorites.FirstOrDefault(f => f.UserId == userId && f.JobId == JobId);
+
+    if (favoriteToRemove != null)
+    {
+        _context.Favorites.Remove(favoriteToRemove);
+
+        Job jobToRemove = _context.Jobs.FirstOrDefault(j => j.JobId == JobId);
+
+        if (jobToRemove != null)
+        {
+            _context.Jobs.Remove(jobToRemove);
+        }
+
+        _context.SaveChanges();
+    }
+
+    return RedirectToAction("Dashboard");
+}
+
+
+//   -------------- Delete Job---------
     [HttpPost("delete/{JobId}")]
     public IActionResult DeleteJob(int JobId)
     {
@@ -160,6 +241,7 @@ public class HomeController : Controller
              _context.SaveChanges();
             return RedirectToAction("Dashboard");
     }
+    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
