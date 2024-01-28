@@ -36,20 +36,21 @@
                     </div>
                     }
                 @* ---------add to My Jobs Button ----------*@
-                @if ( UserId!=Model.Creator.UserId){
-                @if(@Model.myUsers.Any(f =>f.UserId == UserId)){
-                    <form asp-action="Done" asp-route-JobId="@Model.JobId" method="post" onsubmit="return confirm('Are you sure you want to mark this job as done?');" method="post">
+                @if ( UserId!=Model.UserId){
+                    @if(!@Model.myUsers.Exists(f=>f.UserId==UserId)){
+                        <form asp-action="AddToFavorites" asp-route-JobId="@Model.JobId" method="post">
                         <div class="d-grid gap-2">
-                                <button class="btn btn-lg btn-outline-danger" type="submit">Done</button>
-                        </div>
-                    </form>}
-                    
-                    else{
-                    <form asp-action="AddToFavorites" asp-route-JobId="@Model.JobId" method="post">
-                    <div class="d-grid gap-2">
-                            <button class="btn btn-lg btn-outline-success" type="submit">Add To My Jobs</button>
-                    </div></form>}
+                                <button class="btn btn-lg btn-outline-success" type="submit">Add To My Jobs</button>
+                        </div></form>
                     }
+                    else
+                    { <form asp-action="Done" asp-route-JobId="@Model.JobId" method="post" onsubmit="return confirm('Are you sure you want to mark this job as done?');" method="post">
+                            <div class="d-grid gap-2">
+                                    <button class="btn btn-lg btn-outline-danger" type="submit">Done</button>
+                            </div>
+                        </form>
+                        }
+                }
             </div>
         @* ---------Image For esthetics----------*@
         <div class="col-6" >
