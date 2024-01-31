@@ -26,15 +26,15 @@
 
    @* ---------Description Input----------*@
     <div class="form-group">
-      <label asp-for="Description" class="form-label mt-4"></label>
-      <span asp-validation-for="Description" class="text-danger"></span><br>
+      <label asp-for="Description" class="form-label mt-4"></label><br>
+      <span asp-validation-for="Description" class="text-secondary"></span>
       <textarea class="form-control" asp-for="Description" rows="3"></textarea>
     </div>
 
     @* ---------Location Input----------*@
     <div class="form-group">
-        <label asp-for="Location" class="form-label mt-4"></label>
-        <span asp-validation-for="Location" class="text-danger"></span> <br>
+        <label asp-for="Location" class="form-label mt-4"></label><br>
+        <span asp-validation-for="Location" class="text-secondary"></span> 
         <input asp-for="Location" class="form-control" placeholder="Enter Location">
     </div><br>
 
