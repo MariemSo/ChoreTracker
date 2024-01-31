@@ -174,7 +174,7 @@ public class HomeController : Controller
         return View(oneJob);
     }
 //   -------------- Add Job To myJobs---------
-    [HttpPost("addTomyJobs/{JobId}")]
+   [HttpPost("addTomyJobs/{JobId}")]
     public IActionResult AddToMyJobs(int JobId)
     {
         if (HttpContext.Session.GetInt32("userId") == null)
@@ -183,35 +183,51 @@ public class HomeController : Controller
         }
 
         int currentUserId = HttpContext.Session.GetInt32("userId") ?? 0;
-
-        int? currentUser = HttpContext.Session.GetInt32("userId");
         Job jobToAssign = _context.Jobs.FirstOrDefault(j => j.JobId == JobId);
 
-        if (currentUser != null && jobToAssign != null)
+        if (jobToAssign != null)
         {
             jobToAssign.WorkerId = currentUserId;
-
             _context.SaveChanges();
-
             return RedirectToAction("Dashboard");
         }
+
         return RedirectToAction("Dashboard"); 
     }
+    //--------------Cancel From MyJobs-----------
+    public IActionResult Cancel(int JobId)
+{
+    if (HttpContext.Session.GetInt32("userId") == null)
+    {
+        return RedirectToAction("Index");
+    }
 
+    int currentUserId = HttpContext.Session.GetInt32("userId") ?? 0;
 
-//   -------------- Delete Job---------
-    [HttpPost("delete/{JobId}")]
-    public IActionResult DeleteJob(int JobId)
-    {   
-        Job JobToDelete = _context.Jobs.FirstOrDefault(d =>d.JobId == JobId);
-        if((JobToDelete.UserId==HttpContext.Session.GetInt32("userId") )|| (JobToDelete.WorkerId==HttpContext.Session.GetInt32("userId"))){
-            _context.Jobs.Remove(JobToDelete);
+    int? currentUser = HttpContext.Session.GetInt32("userId");
+    Job jobToCancel = _context.Jobs.FirstOrDefault(j => j.JobId == JobId);
+
+    if (currentUser != null && jobToCancel != null)
+    {
+        // Check if the current user is the assigned worker for the job
+        if (jobToCancel.WorkerId == currentUserId)
+        {
+            jobToCancel.WorkerId = null;
+
             _context.SaveChanges();
+
             return RedirectToAction("Dashboard");
         }
-        return RedirectToAction("Index");
-            
+        else
+        {
+            // Handle the case where the current user is not the assigned worker
+            // You can add a message or redirect to an error page
+            return RedirectToAction("Error");
+        }
     }
+
+    return RedirectToAction("Dashboard");
+}
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()

@@ -55,7 +55,7 @@
             
             @* ---------Delete Button ---------*@
             <form asp-action="DeleteJob" asp-route-JobId="@j.JobId" method="post">
-              <button type="submit" class="btn btn-primary">Cancel</button>
+              <button type="submit" class="btn btn-primary">Delete</button>
             </form>
       }
       @* -----------------------------------------------*@
@@ -98,6 +98,10 @@
             @* ---------Done Button ---------*@
             <form asp-action="DeleteJob" asp-route-JobId="@j.JobId" onsubmit="return confirm('Are you sure you want to mark this job as done?');" method="post">
                 <button type="submit" class="doneButton btn btn-primary">Done</button>
+            </form >
+            @* ---------Cancel Button ---------*@
+            <form asp-action="Cancel" asp-route-JobId="@j.JobId" onsubmit="return confirm('Are you sure you want to Cancel this job ');" method="post">
+                <button type="submit" class="doneButton btn btn-primary">Cancel</button>
             </form >
             @* -----------------------------------------------*@
             </td>

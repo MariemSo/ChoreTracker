@@ -24,7 +24,7 @@
                     <div class="card-footer text-muted">
                        Posted On : @Model.CreatedAt
                     </div>
-                </div>
+                </div><br>
                 @* ---------add to My Jobs Button ----------*@
                 @if (UserId != Model.UserId){
 
@@ -38,16 +38,21 @@
                 else{
                     <form asp-action="DeleteJob" asp-route-JobId="@Model.JobId" method="post" onsubmit="return confirm('Are you sure you want to mark this job as done?');" method="post">
                             <div class="d-grid gap-2">
-                                    <button class="btn btn-lg btn-outline-danger" type="submit">Done</button>
+                                    <button class="btn btn-lg btn-outline-success" type="submit">Done</button>
                             </div>
-                        </form>
+                    </form><br>
+                    <form asp-action="Cancel" asp-route-JobId="@Model.JobId" method="post" onsubmit="return confirm('Are you sure you want to Cancel this job ?');" method="post">
+                            <div class="d-grid gap-2">
+                                    <button class="btn btn-lg btn-outline-danger" type="submit">Cancel</button>
+                            </div>
+                    </form>
                 }
                 }else
                 {
                    <div class="d-flex justify-content-end gap-2">
                         <button class="btn btn-lg btn-outline-success "><a href="/edit/@Model.JobId" class="text-dark">Edit</a></button>                
-                        <form asp-action="DeleteJob" asp-route-JobId="@Model.JobId" method="post"  onsubmit="return confirm('Are you sure you want to cancel this job: @Model.Title?');">
-                            <button type="submit" class="btn btn-lg btn-outline-danger text-dark ">Cancel</button>
+                        <form asp-action="DeleteJob" asp-route-JobId="@Model.JobId" method="post"  onsubmit="return confirm('Are you sure you want to Dalete this job: @Model.Title?');">
+                            <button type="submit" class="btn btn-lg btn-outline-danger text-dark ">Delete</button>
                         </form>
                     </div>
                 }
