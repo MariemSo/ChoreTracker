@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\souay\\OneDrive\\Bureau\\Chore Tracker\\ChoreTracker\\choreTracker\\wwwroot\\js\\btn.js",
+      "PackagePath": "staticwebassets\\js\\btn.js"
+    },
+    {
       "Id": "C:\\Users\\souay\\OneDrive\\Bureau\\Chore Tracker\\ChoreTracker\\choreTracker\\wwwroot\\js\\logReg.js",
       "PackagePath": "staticwebassets\\js\\logReg.js"
     },

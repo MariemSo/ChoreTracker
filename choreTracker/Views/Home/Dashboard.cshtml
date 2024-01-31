@@ -40,22 +40,22 @@
       
        @* ---------View Button ---------*@
        <a href="view/@j.JobId">
-        <button type="submit" class="btn btn-primary" class="">View</button>
+        <button type="submit" class="viewButton btn btn-primary" class="">View</button>
        </a>
        @* ---------Add Button ---------*@
        @if (UserId!=j.Creator.UserId){
         <form method="post" asp-action="AddToMyJobs" asp-route-jobId="@j.JobId">
-        <button type="submit" class="btn btn-primary" >Add</button>
+        <button type="submit" class="addButton btn btn-primary" >Add</button>
         </form>}
       @* ---------Condition For User In Session ---------*@
         @if ( UserId==j.UserId){
             
             @* ---------Edit Button ---------*@
-            <a href="edit/@j.JobId"><button type="button" class="btn btn-primary">Edit</button></a>
+            <a href="edit/@j.JobId"><button type="button" class="editButton btn btn-primary">Edit</button></a>
             
             @* ---------Delete Button ---------*@
             <form asp-action="DeleteJob" asp-route-JobId="@j.JobId" method="post">
-              <button type="submit" class="btn btn-primary">Delete</button>
+              <button type="submit" class="cancelButton btn btn-primary">Delete</button>
             </form>
       }
       @* -----------------------------------------------*@
@@ -93,7 +93,7 @@
             
             @* ---------View Button ---------*@
              <a href="view/@j.JobId">
-                <button type="submit" class="btn btn-primary" class="">View</button>
+                <button type="submit" class="viewButton btn btn-primary" class="">View</button>
               </a>
             @* ---------Done Button ---------*@
             <form asp-action="DeleteJob" asp-route-JobId="@j.JobId" onsubmit="return confirm('Are you sure you want to mark this job as done?');" method="post">
@@ -101,7 +101,7 @@
             </form >
             @* ---------Cancel Button ---------*@
             <form asp-action="Cancel" asp-route-JobId="@j.JobId" onsubmit="return confirm('Are you sure you want to Cancel this job ');" method="post">
-                <button type="submit" class="doneButton btn btn-primary">Cancel</button>
+                <button type="submit" class="cancelButton btn btn-primary">Cancel</button>
             </form >
             @* -----------------------------------------------*@
             </td>

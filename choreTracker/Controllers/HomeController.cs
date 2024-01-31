@@ -218,17 +218,24 @@ public class HomeController : Controller
 
             return RedirectToAction("Dashboard");
         }
-        else
-        {
-            // Handle the case where the current user is not the assigned worker
-            // You can add a message or redirect to an error page
-            return RedirectToAction("Error");
-        }
     }
 
     return RedirectToAction("Dashboard");
 }
-
+//   -------------- Delete Job---------
+    [HttpPost("delete/{JobId}")]
+    public IActionResult DeleteJob(int JobId)
+    {
+        System.Console.WriteLine(JobId);
+            Job toDelete = _context.Jobs.FirstOrDefault(d =>d.JobId == JobId);
+            System.Console.WriteLine(toDelete==null);
+            if(toDelete == null)
+                return RedirectToAction("Dashboard");
+            _context.Jobs.Remove(toDelete);
+            _context.SaveChanges();
+            return RedirectToAction("Dashboard");
+    }
+    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
