@@ -4,18 +4,16 @@ document.addEventListener("DOMContentLoaded", function () {
       var buttons = document.getElementsByClassName(buttonClass);
 
       Array.from(buttons).forEach(function(button) {
-        var defaultText = button.innerText;
+
 
         button.addEventListener("mouseover", function () {
-          button.classList.remove('btn-primary');
+          button.classList.remove('btn-dark');
           button.classList.add(hoverClass);
-          button.innerText = hoverText;
         });
 
         button.addEventListener("mouseout", function () {
           button.classList.remove(hoverClass);
-          button.classList.add('btn-primary');
-          button.innerText = defaultText;
+          button.classList.add('btn-dark');
         });
       });
     }
@@ -32,5 +30,5 @@ document.addEventListener("DOMContentLoaded", function () {
     // Applying hover effect to Cancel Buttons
     applyHoverEffect('cancelButton', 'How Sad!', 'btn-secondary');
 
-    applyHoverEffect('doneButton', "Oh You'r Rich!", 'btn-secondary');
+    applyHoverEffect('doneButton', "Oh You'r Rich!", 'btn-info');
 });
