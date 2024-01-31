@@ -19,6 +19,7 @@ public class User{
 
     [Required]
     [DataType(DataType.Password)]
+    [MinLength(8,ErrorMessage="The password must be at least 8 characters")]
     public string Password{get;set;}
 
     [Required(ErrorMessage ="Confirm password is required")]
@@ -26,11 +27,12 @@ public class User{
     [Compare("Password",ErrorMessage ="Password and confirm password must match !")]
     [DataType(DataType.Password)]
     public string ConfirmPassword{get;set;}
+    
     public DateTime CreatedAt{get;set;}=DateTime.Now;
     public DateTime UpdatedAt{get;set;}=DateTime.Now;
 
-    public List<Job> createdJobs{get;set;}=new List<Job>();
-    public List<Favorite> myJobs{get;set;}=new List<Favorite>();
+    public List<Job> CreatedJobs{get;set;}=new List<Job>();
+    public List<Job> MyJobs{get;set;}=new List<Job>();
 
 
 

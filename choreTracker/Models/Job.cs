@@ -7,7 +7,6 @@ public class Job{
 
     [Key]
     public int JobId {get;set;}
-    
     [MinLength(3, ErrorMessage = "The minimum length for the Title field is 3 characters")]
     public string Title{get;set;}
 
@@ -20,10 +19,10 @@ public class Job{
     public DateTime CreatedAt{get;set;}=DateTime.Now;
     public DateTime UpdatedAt{get;set;}=DateTime.Now;
 
-    public int UserId {get;set;}
+    public int? UserId {get; set;}    
+
     public User? Creator {get;set;}
 
-    public List<Favorite> myUsers{get;set;}=new List<Favorite>();
-
-
+    public int? WorkerId {get; set;}
+    public User? Worker {get;set;}
 }

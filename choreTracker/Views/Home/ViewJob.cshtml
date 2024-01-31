@@ -21,26 +21,42 @@
                         <li class="list-group-item">Posted By: <span class="text-dark">@Model.Creator.FName @Model.Creator.LName</li>
                     </ul>
                     @* ---------Buttons for User In session----------*@
-                    @if(UserId==Model.UserId){
-                    <div class="card-body">
-                        <a href="/edit/@Model.JobId" class="card-link">Edit</a>
-                        <a href="/delete/@Model.JobId" class="card-link">Delete</a>
-                    </div>
-                    }
-                    @* -----------------------------------------------*@
                     <div class="card-footer text-muted">
                        Posted On : @Model.CreatedAt
                     </div>
                 </div>
                 @* ---------add to My Jobs Button ----------*@
-                 <div class="d-grid gap-2">
+                @if (UserId != Model.UserId){
+
+                
+                @if(UserId !=Model.WorkerId ){
+
+                  <div class="d-grid gap-2">
                     <button class="btn btn-lg btn-outline-success" type="button">Add To My Jobs</button>
-                </div>
+                </div>  
+                }
+                else{
+                    <form asp-action="DeleteJob" asp-route-JobId="@Model.JobId" method="post" onsubmit="return confirm('Are you sure you want to mark this job as done?');" method="post">
+                            <div class="d-grid gap-2">
+                                    <button class="btn btn-lg btn-outline-danger" type="submit">Done</button>
+                            </div>
+                        </form>
+                }
+                }else
+                {
+                   <div class="d-flex justify-content-end gap-2">
+                        <button class="btn btn-lg btn-outline-success "><a href="/edit/@Model.JobId" class="text-dark">Edit</a></button>                
+                        <form asp-action="DeleteJob" asp-route-JobId="@Model.JobId" method="post"  onsubmit="return confirm('Are you sure you want to cancel this job: @Model.Title?');">
+                            <button type="submit" class="btn btn-lg btn-outline-danger text-dark ">Cancel</button>
+                        </form>
+                    </div>
+                }
+                 
             </div>
         @* ---------Image For esthetics----------*@
         <div class="col-6" >
             <img src="https://img.freepik.com/premium-vector/person-sits-chair-man-has-idea-programmer-flat-design-man-with-laptop_616756-9.jpg?w=740"
-               style="size:30%" alt="">
+               style="size:20%" alt="">
         </div>
     </div>
    

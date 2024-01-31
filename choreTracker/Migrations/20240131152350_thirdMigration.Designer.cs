@@ -11,8 +11,8 @@ using choreTracker.Models;
 namespace choreTracker.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20240125193644_firstMigration")]
-    partial class firstMigration
+    [Migration("20240131152350_thirdMigration")]
+    partial class thirdMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,33 +20,6 @@ namespace choreTracker.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("choreTracker.Models.Favorite", b =>
-                {
-                    b.Property<int>("FavoriteId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("JobId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("FavoriteId");
-
-                    b.HasIndex("JobId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Favorites");
-                });
 
             modelBuilder.Entity("choreTracker.Models.Job", b =>
                 {
@@ -75,9 +48,14 @@ namespace choreTracker.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<int>("WorkerId")
+                        .HasColumnType("int");
+
                     b.HasKey("JobId");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("WorkerId");
 
                     b.ToTable("Jobs");
                 });
@@ -115,39 +93,23 @@ namespace choreTracker.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("choreTracker.Models.Favorite", b =>
-                {
-                    b.HasOne("choreTracker.Models.Job", "Job")
-                        .WithMany("myUsers")
-                        .HasForeignKey("JobId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("choreTracker.Models.User", "User")
-                        .WithMany("myJobs")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Job");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("choreTracker.Models.Job", b =>
                 {
                     b.HasOne("choreTracker.Models.User", "Creator")
                         .WithMany("createdJobs")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("choreTracker.Models.User", "Worker")
+                        .WithMany("myJobs")
+                        .HasForeignKey("WorkerId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Creator");
-                });
 
-            modelBuilder.Entity("choreTracker.Models.Job", b =>
-                {
-                    b.Navigation("myUsers");
+                    b.Navigation("Worker");
                 });
 
             modelBuilder.Entity("choreTracker.Models.User", b =>

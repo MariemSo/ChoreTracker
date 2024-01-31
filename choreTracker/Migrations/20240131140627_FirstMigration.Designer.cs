@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using choreTracker.Models;
 
@@ -10,9 +11,10 @@ using choreTracker.Models;
 namespace choreTracker.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20240131140627_FirstMigration")]
+    partial class FirstMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,17 +45,12 @@ namespace choreTracker.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("WorkerId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("JobId");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("WorkerId");
 
                     b.ToTable("Jobs");
                 });
@@ -96,23 +93,15 @@ namespace choreTracker.Migrations
                     b.HasOne("choreTracker.Models.User", "Creator")
                         .WithMany("createdJobs")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("choreTracker.Models.User", "Worker")
-                        .WithMany("myJobs")
-                        .HasForeignKey("WorkerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Creator");
-
-                    b.Navigation("Worker");
                 });
 
             modelBuilder.Entity("choreTracker.Models.User", b =>
                 {
                     b.Navigation("createdJobs");
-
-                    b.Navigation("myJobs");
                 });
 #pragma warning restore 612, 618
         }

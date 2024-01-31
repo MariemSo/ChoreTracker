@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pnA5+5k25yHZzkFAOXTHBXcFgbUAvy7Z3YF6XRyZzn6EaXZAadYpLkUQaN+0AE0YZ0lYx9dxT2ibzm8splqcdA==",
+  "dgSpecHash": "zRa/scvxDxQMLLigRXrdzdUZTFT45Q5jSrL/+B6jRcyidgltroY+ZZwNwUYqIG1D7ssQel5TFyA2Jk9EY7sS2g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\souay\\OneDrive\\Bureau\\ChoreTracker\\choreTracker\\choreTracker.csproj",
+  "projectFilePath": "C:\\Users\\souay\\OneDrive\\Bureau\\Chore Tracker\\ChoreTracker\\choreTracker\\choreTracker.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\souay\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\souay\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.3\\microsoft.entityframeworkcore.6.0.3.nupkg.sha512",

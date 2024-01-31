@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\souay\\OneDrive\\Bureau\\ChoreTracker\\choreTracker\\choreTracker.csproj": {}
+    "C:\\Users\\souay\\OneDrive\\Bureau\\Chore Tracker\\ChoreTracker\\choreTracker\\choreTracker.csproj": {}
   },
   "projects": {
-    "C:\\Users\\souay\\OneDrive\\Bureau\\ChoreTracker\\choreTracker\\choreTracker.csproj": {
+    "C:\\Users\\souay\\OneDrive\\Bureau\\Chore Tracker\\ChoreTracker\\choreTracker\\choreTracker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\souay\\OneDrive\\Bureau\\ChoreTracker\\choreTracker\\choreTracker.csproj",
+        "projectUniqueName": "C:\\Users\\souay\\OneDrive\\Bureau\\Chore Tracker\\ChoreTracker\\choreTracker\\choreTracker.csproj",
         "projectName": "choreTracker",
-        "projectPath": "C:\\Users\\souay\\OneDrive\\Bureau\\ChoreTracker\\choreTracker\\choreTracker.csproj",
+        "projectPath": "C:\\Users\\souay\\OneDrive\\Bureau\\Chore Tracker\\ChoreTracker\\choreTracker\\choreTracker.csproj",
         "packagesPath": "C:\\Users\\souay\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\souay\\OneDrive\\Bureau\\ChoreTracker\\choreTracker\\obj\\",
+        "outputPath": "C:\\Users\\souay\\OneDrive\\Bureau\\Chore Tracker\\ChoreTracker\\choreTracker\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\souay\\AppData\\Roaming\\NuGet\\NuGet.Config",

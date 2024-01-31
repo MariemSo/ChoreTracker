@@ -1,7 +1,7 @@
 @{
     int UserId = (int)Context.Session.GetInt32("userId");
 }
-@model List<Job>
+@model choreTracker.Models.User
 
 @* ---------NavBar Partial----------*@
 @await Html.PartialAsync("_NavBar")
@@ -32,21 +32,23 @@
   </thead>
   <tbody>
   @* ---------Loop For Rows of Jobs List ---------*@
-    @foreach (Job j in Model){
+    @foreach (Job j in ViewBag.AllJobs){
     <tr class="table-active">
       <td scope="row">@j.Title</td>
       <td>@j.Location</td>
       <td class="d-flex justify-content-center gap-2">
       
        @* ---------View Button ---------*@
-       <a href="viewJob/@j.JobId">
-        <button type="button" class="btn btn-primary" class="">View</button>
+       <a href="view/@j.JobId">
+        <button type="submit" class="btn btn-primary" class="">View</button>
        </a>
        @* ---------Add Button ---------*@
-        <button type="button" class="btn btn-primary" >Add</button>
-      
+       @if (UserId!=j.Creator.UserId){
+        <form method="post" asp-action="AddToMyJobs" asp-route-jobId="@j.JobId">
+        <button type="submit" class="btn btn-primary" >Add</button>
+        </form>}
       @* ---------Condition For User In Session ---------*@
-        @if ( UserId==j.Creator.UserId){
+        @if ( UserId==j.UserId){
             
             @* ---------Edit Button ---------*@
             <a href="edit/@j.JobId"><button type="button" class="btn btn-primary">Edit</button></a>
@@ -62,5 +64,52 @@
     }  
     </tbody>
 </table>
+</div>
+@* ----------------------MyJobs----------------- *@
+<div class="container">
+  <h2 class="page-section-heading text-center text-uppercase text-dark mb-0 pt-5">My Jobs</h2>
+  <div class="divider-custom divider-light">
+      <div class="divider-custom-line"></div>
+      <div class="divider-custom-icon"><i class='bx bx-clipboard'></i></div>
+      <div class="divider-custom-line"></div>
+</div>
+<div class="d-flex justify-space-between row" >
+    <div class="col-8">
+
+        <table class="table table-hover">
+        <thead class="table-primary">
+            <tr>
+            <th scope="col">My Jobs</th>
+            <th scope="col" class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        @* ---------Loop For Rows of Jobs List ---------*@
+        @foreach (Job j in Model.MyJobs){
+     
+            <tr class="table-active">
+            <td scope="row">@j.Title</td>
+            <td class="d-flex justify-content-center gap-2">
+            
+            @* ---------View Button ---------*@
+             <a href="view/@j.JobId">
+                <button type="submit" class="btn btn-primary" class="">View</button>
+              </a>
+            @* ---------Done Button ---------*@
+            <form asp-action="DeleteJob" asp-route-JobId="@j.JobId" onsubmit="return confirm('Are you sure you want to mark this job as done?');" method="post">
+                <button type="submit" class="doneButton btn btn-primary">Done</button>
+            </form >
+            @* -----------------------------------------------*@
+            </td>
+            </tr>
+            }   
+            </tbody>
+        </table>
+    </div>
+<div class="col-2">
+    <img src="https://img.freepik.com/free-vector/flat-creativity-concept-illustration_52683-64279.jpg?w=740&t=st=1706238626~exp=1706239226~hmac=80d98baf36b971830a341301bd52f2406756d86e0b0808aabbafb61bd1db113c" class="img">
+</div>
+</div>
+<script src="~/js/btn.js" asp-append-version="true"></script>
 </div>
 </div>

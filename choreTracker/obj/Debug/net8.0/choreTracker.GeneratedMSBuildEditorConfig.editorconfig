@@ -9,63 +9,67 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = choreTracker
 build_property.RootNamespace = choreTracker
-build_property.ProjectDir = C:\Users\souay\OneDrive\Bureau\ChoreTracker\choreTracker\
+build_property.ProjectDir = C:\Users\souay\OneDrive\Bureau\Chore Tracker\ChoreTracker\choreTracker\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\souay\OneDrive\Bureau\ChoreTracker\choreTracker
+build_property.MSBuildProjectDirectory = C:\Users\souay\OneDrive\Bureau\Chore Tracker\ChoreTracker\choreTracker
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Home/AddJob.cshtml]
+[C:/Users/souay/OneDrive/Bureau/Chore Tracker/ChoreTracker/choreTracker/Views/Home/AddJob.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBZGRKb2IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Home/Dashboard.cshtml]
+[C:/Users/souay/OneDrive/Bureau/Chore Tracker/ChoreTracker/choreTracker/Views/Home/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYXNoYm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Home/EditJob.cshtml]
+[C:/Users/souay/OneDrive/Bureau/Chore Tracker/ChoreTracker/choreTracker/Views/Home/EditJob.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFZGl0Sm9iLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Home/Index.cshtml]
+[C:/Users/souay/OneDrive/Bureau/Chore Tracker/ChoreTracker/choreTracker/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Home/Privacy.cshtml]
+[C:/Users/souay/OneDrive/Bureau/Chore Tracker/ChoreTracker/choreTracker/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Home/ViewJob.cshtml]
+[C:/Users/souay/OneDrive/Bureau/Chore Tracker/ChoreTracker/choreTracker/Views/Home/ViewJob.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxWaWV3Sm9iLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Home/_Login.cshtml]
+[C:/Users/souay/OneDrive/Bureau/Chore Tracker/ChoreTracker/choreTracker/Views/Home/_Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Shared/Error.cshtml]
+[C:/Users/souay/OneDrive/Bureau/Chore Tracker/ChoreTracker/choreTracker/Views/Home/_Login2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfTG9naW4yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/souay/OneDrive/Bureau/Chore Tracker/ChoreTracker/choreTracker/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Shared/_NavBar.cshtml]
+[C:/Users/souay/OneDrive/Bureau/Chore Tracker/ChoreTracker/choreTracker/Views/Shared/_NavBar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9OYXZCYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/souay/OneDrive/Bureau/Chore Tracker/ChoreTracker/choreTracker/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/_ViewImports.cshtml]
+[C:/Users/souay/OneDrive/Bureau/Chore Tracker/ChoreTracker/choreTracker/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/_ViewStart.cshtml]
+[C:/Users/souay/OneDrive/Bureau/Chore Tracker/ChoreTracker/choreTracker/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/souay/OneDrive/Bureau/ChoreTracker/choreTracker/Views/Shared/_Layout.cshtml]
+[C:/Users/souay/OneDrive/Bureau/Chore Tracker/ChoreTracker/choreTracker/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-2zwkm63hzk

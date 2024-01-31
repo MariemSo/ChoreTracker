@@ -1,12 +1,11 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
 
 
 using choreTracker.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
 
 namespace choreTracker.Controllers;
 
@@ -21,11 +20,16 @@ public class HomeController : Controller
         _logger = logger;
     }
 
+//        //   -------------- LandingPage / LogReg Form ---------
+
     public IActionResult Index()
     {
+        HttpContext.Session.SetInt32("mbr", value: 2);
         return View();
     }
     [HttpPost]
+    //   -------------- Register Job---------
+
     public IActionResult Register(User newUser)
     {
         if (ModelState.IsValid)
@@ -43,11 +47,16 @@ public class HomeController : Controller
             HttpContext.Session.SetString("name", newUser.FName);
             return RedirectToAction("Dashboard");
         }
+        HttpContext.Session.SetInt32("mbr", value: 1);
+
         return View("Index");
     }
+    //   -------------- Login Job---------
+
     [HttpPost]
     public IActionResult Login(LogUser newLogUser)
     {
+        HttpContext.Session.SetInt32("mbr", 2);
         if (ModelState.IsValid)
         {
             User userfromdb = _context.Users.FirstOrDefault(u => u.Email == newLogUser.LogEmail);
@@ -69,6 +78,7 @@ public class HomeController : Controller
         }
         return View("Index");
     }
+//   -------------- LogOut---------
 
     [HttpGet("logout")]
     public IActionResult Logout()
@@ -77,6 +87,7 @@ public class HomeController : Controller
         return RedirectToAction("Index");
     }
 
+
     [HttpGet("dashboard")]
     public IActionResult Dashboard()
     {
@@ -84,20 +95,27 @@ public class HomeController : Controller
         {
             return RedirectToAction("Index");
         }
-        List<Job> AllJobs = _context.Jobs.Include(c=>c.Creator).ToList();
-
-        return View(AllJobs);
+        ViewBag.AllJobs = _context.Jobs.Include(c => c.Creator).Where(j => j.WorkerId == null).ToList();
+        int userId = HttpContext.Session.GetInt32("userId") ?? 0;
+        User? jobsUser = _context.Users
+            .Include(u => u.MyJobs)
+            .FirstOrDefault(u => u.UserId == userId);
+        return View(jobsUser);
     }
+    //   -------------- ADD Job / Get---------
 
     [HttpGet("addjob")]
     public IActionResult AddJob()
     {
         if (HttpContext.Session.GetInt32("userId") == null)
         {
+            
             return RedirectToAction("Dashboard");
         }
         return View();
     }
+    //   -------------- Create Job / Post---------
+
     [HttpPost("jobs/create")]
     public IActionResult CreateJob(Job newJob)
     {
@@ -105,20 +123,11 @@ public class HomeController : Controller
         {
                 _context.Add(newJob);
                 _context.SaveChanges();
-            return RedirectToAction("Dashboard");
+                return RedirectToAction("Dashboard");
         }
-        return View("AddJob", newJob);
+        return View("AddJob");
     }
-    [HttpGet("viewJob/{JobId}")]
-    public IActionResult ViewJob(int JobId)
-    {
-        if (HttpContext.Session.GetInt32("userId") == null)
-        {
-            return RedirectToAction("Index");
-        }
-        Job? oneJob = _context.Jobs.Include(c=>c.Creator).FirstOrDefault(j =>j.JobId == JobId);
-        return View(oneJob);
-    }
+    
     [HttpGet("edit/{JobId}")]
     public IActionResult EditJob(int JobId)
     {
@@ -126,40 +135,84 @@ public class HomeController : Controller
         {
         return RedirectToAction("Index");
         }
-            Job? jobToEdit = _context.Jobs
-            .SingleOrDefault(d => d.JobId == JobId);
+        Job? jobToEdit = _context.Jobs.SingleOrDefault(d => d.JobId == JobId);
         return View( jobToEdit);
     }
-     [HttpPost("/jobs/update/{JobId}")]
+    //   -------------- Update Job / Post---------
+
+    [HttpPost("jobs/update/{JobId}")]
     public IActionResult UpdateJob(int JobId, Job newestJob)
     {
         Job? oldJob = _context.Jobs.FirstOrDefault(b => b.JobId ==JobId);
-         if (ModelState.IsValid)
+        if(oldJob.UserId==HttpContext.Session.GetInt32("userId")){
+            if (ModelState.IsValid)
+            {
+                oldJob.Title = newestJob.Title;
+                oldJob.Description = newestJob.Description;
+                oldJob.Location = newestJob.Location;
+                oldJob.UpdatedAt = newestJob.UpdatedAt;
+                _context.SaveChanges();
+
+                return RedirectToAction("Dashboard");
+            }
+            return View("EditJob", oldJob);
+        }else{
+            return RedirectToAction("Index");
+        }
+
+    }
+    //   -------------- Show One Job---------
+
+    [HttpGet("view/{JobId}")]
+    public IActionResult ViewJob(int JobId)
+    {
+        if (HttpContext.Session.GetInt32("userId") == null)
         {
-            oldJob.Title = newestJob.Title;
-            oldJob.Description = newestJob.Description;
-            oldJob.Location = newestJob.Location;
-            oldJob.UpdatedAt = newestJob.UpdatedAt;
+            return RedirectToAction("Index");
+        }
+        Job? oneJob = _context.Jobs.Include(u=>u.Creator).FirstOrDefault(j =>j.JobId == JobId);
+        return View(oneJob);
+    }
+//   -------------- Add Job To myJobs---------
+    [HttpPost("addTomyJobs/{JobId}")]
+    public IActionResult AddToMyJobs(int JobId)
+    {
+        if (HttpContext.Session.GetInt32("userId") == null)
+        {
+            return RedirectToAction("Index");
+        }
+
+        int currentUserId = HttpContext.Session.GetInt32("userId") ?? 0;
+
+        int? currentUser = HttpContext.Session.GetInt32("userId");
+        Job jobToAssign = _context.Jobs.FirstOrDefault(j => j.JobId == JobId);
+
+        if (currentUser != null && jobToAssign != null)
+        {
+            jobToAssign.WorkerId = currentUserId;
+
             _context.SaveChanges();
 
-            return RedirectToAction("Dashboard",newestJob);
+            return RedirectToAction("Dashboard");
         }
-        return View("EditJob", oldJob);
-
+        return RedirectToAction("Dashboard"); 
     }
-   
+
+
+//   -------------- Delete Job---------
     [HttpPost("delete/{JobId}")]
     public IActionResult DeleteJob(int JobId)
-    {
-        System.Console.WriteLine(JobId);
-            Job toDelete = _context.Jobs.FirstOrDefault(d =>d.JobId == JobId);
-            System.Console.WriteLine(toDelete==null);
-            if(toDelete == null)
-                return RedirectToAction("Dashboard");
-            _context.Jobs.Remove(toDelete);
-             _context.SaveChanges();
+    {   
+        Job JobToDelete = _context.Jobs.FirstOrDefault(d =>d.JobId == JobId);
+        if((JobToDelete.UserId==HttpContext.Session.GetInt32("userId") )|| (JobToDelete.WorkerId==HttpContext.Session.GetInt32("userId"))){
+            _context.Jobs.Remove(JobToDelete);
+            _context.SaveChanges();
             return RedirectToAction("Dashboard");
+        }
+        return RedirectToAction("Index");
+            
     }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
