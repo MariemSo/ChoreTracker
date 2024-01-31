@@ -30,10 +30,11 @@
 
                 
                 @if(UserId !=Model.WorkerId ){
-
+                <form method="post" asp-action="AddToMyJobs" asp-route-jobId="@Model.JobId">
                   <div class="d-grid gap-2">
-                    <button class="btn btn-lg btn-outline-success" type="button">Add To My Jobs</button>
-                </div>  
+                    <button class="btn btn-lg btn-outline-success" type="submit">Add To My Jobs</button>
+                </div> 
+                </form>
                 }
                 else{
                     <form asp-action="DeleteJob" asp-route-JobId="@Model.JobId" method="post" onsubmit="return confirm('Are you sure you want to mark this job as done?');" method="post">
